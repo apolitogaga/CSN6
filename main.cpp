@@ -6,11 +6,11 @@
 
 using namespace std;
 
-const int N0 = 10;
-const int M0 = 2;
+const int N0 = 100;
+const int M0 = 10;
 const int TMAX = 10000;
 
-void create_degree_sequence(vector<int> stubs, int t)
+void create_degree_sequence_from_stubs(vector<int> stubs, int t)
 {
     const int N = N0 + t;
 
@@ -23,13 +23,15 @@ void create_degree_sequence(vector<int> stubs, int t)
         degree[stubs[i]-1]++;
     }
 
-    //Sorts degrees descending
-    sort(degree.begin(),degree.end(), greater<int>());
+    //If it should be final degree sequence, sort degrees descending
+    if(t==TMAX) sort(degree.begin(),degree.end(), greater<int>());
 
     stringstream ss;
 
-    ss << "C:\\users\\Pawel\\Desktop\\degree";
-    if(t<TMAX) ss << "_" << t;
+    //Prepare filename
+    ss << "C:\\users\\Pawel\\Desktop\\degree_";
+    if(t<TMAX) ss  << t;
+    else ss << "sequence";
     ss << ".txt";
 
     string filename = ss.str();
@@ -93,11 +95,11 @@ int main()
 
         if(t==1||t==10||t==100||t==1000)
         {
-            create_degree_sequence(stubs,t);
+            create_degree_sequence_from_stubs(stubs,t);
         }
     }
 
-    create_degree_sequence(stubs,TMAX);
+    create_degree_sequence_from_stubs(stubs,TMAX);
 
     return 0;
 }
