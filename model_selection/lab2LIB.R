@@ -27,7 +27,7 @@ minus_LL_zeta <- function(gamma) {
 }
 
 minus_LL_zeta_gamma2 <- function() {
-    2 * sum(log(x)) + length(x) * log(zeta(3, deriv = 0))
+    3 * sum(log(x)) + length(x) * log(zeta(3, deriv = 0))
 }
 
 

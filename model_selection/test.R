@@ -13,6 +13,25 @@ language <-x1
 lm(log(mean_length)~log(vertices), language)
 with(language, leveneTest(mean_length,vertices,language))
 
+####Calculate geometric values
+minus_log_likelihood_geometric <- function(q = nm) {
+    (m - n) * log (1 - q) + n * log(q)
+}
+####Calculate zeta2 values
+minus_log_likelihood_zeta2 <- function() {
+    -2 * sum(log(degree_seq)) - n * log(pi ^ 2 / 6)
+}
+
+####Calculate zeta values
+minus_log_likelihood_zeta <- function(gamma = 3) {
+    -gamma * sum(log(degree_seq)) - n * log(zeta(gamma))
+}
+
+####Calculate zetaright values
+minus_log_likelihood_zetaright <- function(gamma = 3, kmax = n) {
+    -gamma * sum(log(x)) - n * log(sum((1:kmax) ^ gamma))
+}
+
 
 ###########################################################################
 ###############################   MODEL0   ################################
